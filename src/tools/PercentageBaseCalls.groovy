@@ -8,7 +8,7 @@ public class PercentageBaseCalls {
     static void main(String[] args) {
         Execute(args)
     }
-    
+
     //java -cp BioinformaticsTools.jar tools.PercentageBaseCalls -r /tmp/151106_M01053_0294_000000000-AKH6W -p 5073770 -o /tmp/done.csv
     public static void Execute(String[] args) {
         if (!args.contains("-r") || !args.contains("-p") || !args.contains("-o")){
