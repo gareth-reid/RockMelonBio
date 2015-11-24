@@ -1,0 +1,31 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile files (fileTree(dir: 'lib', include: ['*.jar'])
+          )
+    compile 'org.codehaus.groovy:groovy-all:2.3.6'
+
+}
+
+sourceSets.main {
+    groovy.srcDirs = ['src']
+    resources.srcDirs = ['src']
+}
+
+task buildJar(type: Jar) {
+    from files(sourceSets.main.output)
+    from {
+        configurations.compile.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+        configurations.runtime.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+    with jar
+}
